@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-0100edf31bd3dadadc06.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "ADAVIA-IHM",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ADAVIA-IHM::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ADAVIA-IHM-Debug-6a44db29ad5875565d4a.json",
+					"name" : "ADAVIA-IHM",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ADAVIA-IHM_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ADAVIA-IHM_autogen-Debug-7b3b7fb6c56186948fed.json",
+					"name" : "ADAVIA-IHM_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ADAVIA-IHM_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ADAVIA-IHM_autogen_timestamp_deps-Debug-78326598055f2658d197.json",
+					"name" : "ADAVIA-IHM_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/anas/ADAVIAIHM/build/Desktop_Qt_5_15_2_GCC_64bit-Debug11",
+		"source" : "/home/anas/ADAVIAIHM"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

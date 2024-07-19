@@ -2,8 +2,6 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "system.h"
-#include "Music/cpp/radialbar.h"
-#include "Music/cpp/qmlinterface.h"
 //#include "tachometerwidget.h"
 //#include "navigationcontrol.h"
 #include <QDebug>
