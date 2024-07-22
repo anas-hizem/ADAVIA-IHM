@@ -15,23 +15,71 @@
         <file>assets/humidity.png</file>
         <file>assets/location.png</file>
         <file>assets/lock.png</file>
-        <file>assets/minus.png</file>
         <file>assets/navette.png</file>
         <file>assets/navigation.png</file>
         <file>assets/needle.svg</file>
-        <file>assets/plus.png</file>
         <file>assets/search.png</file>
         <file>assets/thermometer.png</file>
         <file>assets/tickmark.svg</file>
         <file>assets/unlock.png</file>
         <file>assets/user.png</file>
-        <file>assets/share.png</file>
-        <file>assets/rewind.png</file>
-        <file>assets/play.png</file>
-        <file>assets/pause.png</file>
-        <file>assets/forward.png</file>
         <file>SliderBar.qml</file>
+        <file>MusicPlayer.qml</file>
+        <file>NavBar.qml</file>
+        <file>assets/path.png</file>
+        <file>fonts/OpenSans-Bold.ttf</file>
+        <file>fonts/OpenSans-BoldItalic.ttf</file>
+        <file>fonts/OpenSans-ExtraBold.ttf</file>
+        <file>fonts/OpenSans-ExtraBoldItalic.ttf</file>
+        <file>fonts/OpenSans-Italic.ttf</file>
+        <file>fonts/OpenSans-Light.ttf</file>
+        <file>fonts/OpenSans-LightItalic.ttf</file>
+        <file>fonts/OpenSans-Regular.ttf</file>
+        <file>fonts/OpenSans-Semibold.ttf</file>
+        <file>fonts/OpenSans-SemiboldItalic.ttf</file>
+        <file>gfx/background.png</file>
+        <file>gfx/bar.png</file>
+        <file>gfx/cover.png</file>
+        <file>gfx/cover_frame.png</file>
+        <file>gfx/cover_overlay.png</file>
+        <file>gfx/slider_background.png</file>
+        <file>gfx/slider_knob.png</file>
+        <file>gfx/slider_value_left.png</file>
+        <file>gfx/slider_value_right.png</file>
+        <file>icons/forward.png</file>
+        <file>icons/pause.png</file>
+        <file>icons/play.png</file>
+        <file>icons/rewind.png</file>
+        <file>icons/share.png</file>
         <file>music/01.Daydreamer.mp3</file>
         <file>music/02.Go.Ahead.mp3</file>
+        <file>music/02.Let.s.Get.Excited.mp3</file>
+        <file>music/03.Chasing.Pavements.mp3</file>
+        <file>music/03.Superwoman.mp3</file>
+        <file>Weather.qml</file>
+        <file>whether/components/BigForecastIcon.qml</file>
+        <file>whether/components/ForecastIcon.qml</file>
+        <file>whether/components/WeatherIcon.qml</file>
+        <file>whether/icons/ic_launcher.png</file>
+        <file>whether/icons/weather-few-clouds.png</file>
+        <file>whether/icons/weather-fog.png</file>
+        <file>whether/icons/weather-haze.png</file>
+        <file>whether/icons/weather-icy.png</file>
+        <file>whether/icons/weather-overcast.png</file>
+        <file>whether/icons/weather-showers.png</file>
+        <file>whether/icons/weather-sleet.png</file>
+        <file>whether/icons/weather-snow.png</file>
+        <file>whether/icons/weather-storm.png</file>
+        <file>whether/icons/weather-sunny-very-few-clouds.png</file>
+        <file>whether/icons/weather-sunny.png</file>
+        <file>whether/icons/weather-thundershower.png</file>
+        <file>whether/appmodel.cpp</file>
+        <file>whether/appmodel.h</file>
+        <file>whether/main.cpp</file>
+        <file>whether/weatherinfo.qml</file>
+        <file>assets/moins.png</file>
+        <file>assets/plus.png</file>
+        <file>assets/spotify.png</file>
+        <file>assets/spotifyimg.png</file>
     </qresource>
 </RCC>

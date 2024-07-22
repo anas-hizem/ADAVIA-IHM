@@ -3,13 +3,14 @@ import QtQuick.Controls 2.4
 
 ApplicationWindow {
     visible: true
-    width: 1280
-    height: 720
+    width: 1920
+    height: 1080
     title: qsTr("ADAVIA IHM")
+    //visibility: "FullScreen"
 
     StackView {
         id: stackView
-        initialItem: Dashboard {}
+        initialItem: Dashboard{}
         anchors.fill: parent
     }
 

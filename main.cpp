@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "system.h"
+#include "whether/appmodel.h"
 //#include "tachometerwidget.h"
 //#include "navigationcontrol.h"
 #include <QDebug>

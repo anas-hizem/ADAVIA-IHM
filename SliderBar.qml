@@ -2,14 +2,13 @@ import QtQuick 2.0
 import QtMultimedia 5.0
 
 Image {
-
     id: barSlider
 
     property MediaPlayer audioPlayer
-    property url bgImg :"assets/slider_background.png"
-    property url bufferImg: "assets/slider_value_left.png"
-    property url progressImg: "assets/slider_value_right.png"
-    property url knobImg :"assets/slider_knob.png"
+    property url bgImg
+    property url bufferImg: "gfx/slider_value_left.png"
+    property url progressImg: "gfx/slider_value_right.png"
+    property url knobImg
 
     width: parent.width
     source: bgImg
