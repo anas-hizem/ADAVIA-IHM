@@ -166,33 +166,7 @@ Window {
                                 }
                             }
                         }
-                        MouseArea {
-                            anchors.fill: row
-                            onClicked: {
-                                mapView.centerOnCoordinates(searchService.get(index).coordinates, -1);
-                                searchBar.focus = true;
-                            }
-                        }
                     }
-                }
-            }
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-            }
-            RowLayout {
-                Button {
-                    enabled: searchService.length
-                    text: "Highlight list on the map "
-                    onClicked:  {
-                        if (mapView.zoomLevel < 65)
-                            mapView.zoomLevel = 65;
-                        mapView.highlightLandmarkList(searchService)
-                    }
-                }
-                Button {
-                    text: "Hide Highlighted list"
-                    onClicked: mapView.hideHighlights()
                 }
             }
         }
@@ -206,6 +180,7 @@ Window {
 1. **Lancer l'application:** Compilez et lancez l'application pour tester la fonctionnalité de recherche textuelle.
 2. **Tester la Recherche:**  Entrez divers termes dans le champ de recherche et vérifiez que les suggestions apparaissent correctement et que la carte se centre sur la localisation sélectionnée.
 3. **Vérifier la Performance:** Assurez-vous que la recherche est rapide et que les résultats sont affichés sans retard significatif.
+
 ![rechDes](https://github.com/user-attachments/assets/96e66ab0-84f8-4f20-b73f-d8e479b18be7)
 
 
