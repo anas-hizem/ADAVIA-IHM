@@ -122,21 +122,9 @@
 			null
 		],
 		[
-			"/home/anas/ADAVIAIHM/navigationcontrol.h",
-			"MU",
-			"EWIEGA46WW/moc_navigationcontrol.cpp",
-			null
-		],
-		[
 			"/home/anas/ADAVIAIHM/system.h",
 			"MU",
 			"EWIEGA46WW/moc_system.cpp",
-			null
-		],
-		[
-			"/home/anas/ADAVIAIHM/tcpsocket.h",
-			"MU",
-			"EWIEGA46WW/moc_tcpsocket.cpp",
 			null
 		]
 	],
@@ -206,9 +194,7 @@
 	[
 		[ "/home/anas/ADAVIAIHM/gauge.cpp", "MU", null ],
 		[ "/home/anas/ADAVIAIHM/main.cpp", "MU", null ],
-		[ "/home/anas/ADAVIAIHM/navigationcontrol.cpp", "MU", null ],
-		[ "/home/anas/ADAVIAIHM/system.cpp", "MU", null ],
-		[ "/home/anas/ADAVIAIHM/tcpsocket.cpp", "MU", null ]
+		[ "/home/anas/ADAVIAIHM/system.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

@@ -20,42 +20,39 @@ Rectangle {
             nameFilters: ["*.mp3"]
         }
 
-        function init(){
-            if(mediaPlayer.playbackState===1){
+        function init() {
+            if (mediaPlayer.playbackState === 1) {
                 mediaPlayer.pause();
-            }else if(mediaPlayer.playbackState===2){
+            } else if (mediaPlayer.playbackState === 2) {
                 mediaPlayer.play();
-            }else{
+            } else {
                 setIndex(0);
             }
         }
 
-        function setIndex(i)
-        {
+        function setIndex(i) {
             index = i;
 
-            if (index < 0 || index >= items.count)
-            {
+            if (index < 0 || index >= items.count) {
                 index = -1;
                 mediaPlayer.source = "";
-            }
-            else{
-                mediaPlayer.source = items.get(index,"filePath");
+            } else {
+                mediaPlayer.source = items.get(index, "filePath");
                 mediaPlayer.play();
             }
         }
 
-        function next(){
+        function next() {
             setIndex(index + 1);
         }
 
-        function previous(){
+        function previous() {
             setIndex(index - 1);
         }
 
         function msToTime(duration) {
-            var seconds = parseInt((duration/1000)%60);
-            var minutes = parseInt((duration/(1000*60))%60);
+            var seconds = parseInt((duration / 1000) % 60);
+            var minutes = parseInt((duration / (1000 * 60)) % 60);
 
             minutes = (minutes < 10) ? "0" + minutes : minutes;
             seconds = (seconds < 10) ? "0" + seconds : seconds;
@@ -66,25 +63,21 @@ Rectangle {
         Connections {
             target: playLogic.mediaPlayer
 
-            onPaused: {
+            function onPaused() {
                 playPause.source = "icons/play.png";
             }
 
-            onPlaying: {
-                 playPause.source = "icons/pause.png";
+            function onPlaying() {
+                playPause.source = "icons/pause.png";
             }
 
-            onStopped: {
+            function onStopped() {
                 playPause.source = "icons/play.png";
                 if (playLogic.mediaPlayer.status == MediaPlayer.EndOfMedia)
                     playLogic.next();
             }
 
-            onError: {
-                console.log(error+" error string is "+errorString);
-            }
-
-            onMediaObjectChanged: {
+            function onMediaObjectChanged() {
                 if (playLogic.mediaPlayer.mediaObject)
                     playLogic.mediaPlayer.mediaObject.notifyInterval = 50;
             }
@@ -109,7 +102,7 @@ Rectangle {
             spacing: 40
 
             Rectangle {
-                id: leftWapper
+                id: leftWrapper
                 height: 130
                 width: 130
                 radius: 10
@@ -130,29 +123,29 @@ Rectangle {
                         anchors.margins: 2
                     }
                 }
-
             }
 
             ColumnLayout {
-                id: rightWapper
-                Layout.minimumWidth: 200
+                id: rightWrapper
+                Layout.fillWidth: true
                 Layout.fillHeight: true
-                spacing: 30
+                spacing: 25
 
                 RowLayout {
                     id: upperWrap
                     Layout.fillWidth: true
                     Layout.preferredHeight: 100
-                    Layout.leftMargin: 30
+                    Layout.leftMargin: 10
                     spacing: 35
 
                     Image {
                         id: prevTrack
                         source: "icons/rewind.png"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.leftMargin: 20
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.leftMargin: 20
                         state: "none"
                         MouseArea {
+                            id: prevTrackMouseArea
                             anchors.fill: parent
                             onClicked: playLogic.previous()
                             onPressed: prevTrack.state = "pressed"
@@ -160,47 +153,42 @@ Rectangle {
                         }
                         states: State {
                             name: "pressed"
-                            when: mouseArea.pressed
+                            when: prevTrackMouseArea.pressed
                             PropertyChanges { target: prevTrack; scale: 0.8 }
                         }
                         transitions: Transition {
                             NumberAnimation { properties: "scale"; duration: 100; easing.type: Easing.InOutQuad }
                         }
                     }
-
-                    Rectangle{
-                        width: 30
-                        anchors.verticalCenter: parent.verticalCenter
-                        Image {
-                            id: playPause
-                            source: "icons/play.png"
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            state: "none"
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: playLogic.init();
-                                onPressed: playPause.state = "pressed"
-                                onReleased: playPause.state = "none"
-                            }
-                            states: State {
-                                name: "pressed"
-                                when: mouseArea.pressed
-                                PropertyChanges { target: playPause; scale: 0.8 }
-                            }
-                            transitions: Transition {
-                                NumberAnimation { properties: "scale"; duration: 100; easing.type: Easing.InOutQuad }
-                            }
+                    Image {
+                        id: playPause
+                        source: "icons/play.png"
+                        Layout.alignment: Qt.AlignHCenter
+                        state: "none"
+                        MouseArea {
+                            id: playPauseMouseArea
+                            anchors.fill: parent
+                            onClicked: playLogic.init();
+                            onPressed: playPause.state = "pressed"
+                            onReleased: playPause.state = "none"
+                        }
+                        states: State {
+                            name: "pressed"
+                            when: playPauseMouseArea.pressed
+                            PropertyChanges { target: playPause; scale: 0.8 }
+                        }
+                        transitions: Transition {
+                            NumberAnimation { properties: "scale"; duration: 100; easing.type: Easing.InOutQuad }
                         }
                     }
 
                     Image {
                         id: nextTrack
                         source: "icons/forward.png"
-                        anchors.verticalCenter: parent.verticalCenter
+                        Layout.alignment: Qt.AlignVCenter
                         state: "none"
-
                         MouseArea {
+                            id: nextTrackMouseArea
                             anchors.fill: parent
                             onClicked: playLogic.next()
                             onPressed: nextTrack.state = "pressed"
@@ -208,7 +196,7 @@ Rectangle {
                         }
                         states: State {
                             name: "pressed"
-                            when: mouseArea.pressed
+                            when: nextTrackMouseArea.pressed
                             PropertyChanges { target: nextTrack; scale: 0.8 }
                         }
                         transitions: Transition {
@@ -219,17 +207,17 @@ Rectangle {
                     Image {
                         id: shareTrack
                         source: "icons/share.png"
-                        anchors.verticalCenter: parent.verticalCenter
+                        Layout.alignment: Qt.AlignVCenter
                         state: "none"
-
                         MouseArea {
+                            id: shareTrackMouseArea
                             anchors.fill: parent
                             onPressed: shareTrack.state = "pressed"
                             onReleased: shareTrack.state = "none"
                         }
                         states: State {
                             name: "pressed"
-                            when: mouseArea.pressed
+                            when: shareTrackMouseArea.pressed
                             PropertyChanges { target: shareTrack; scale: 0.8 }
                         }
                         transitions: Transition {
@@ -237,10 +225,12 @@ Rectangle {
                         }
                     }
                 }
+
                 RowLayout {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 30
                     Layout.leftMargin: 30
+                    spacing: 5
 
                     Item {
                         Layout.fillWidth: true
@@ -289,7 +279,7 @@ Rectangle {
                         font.pointSize: 15
                     }
 
-                    SliderBar{
+                    SliderBar {
                         Layout.fillWidth: true
                         audioPlayer: player
                         bgImg: "gfx/slider_background.png"
@@ -306,10 +296,7 @@ Rectangle {
                         font.pointSize: 15
                     }
                 }
-
             }
-
         }
-
     }
 }

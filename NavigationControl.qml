@@ -14,7 +14,6 @@ Item {
     property int leftMotorSpeed: 0
     property int rightMotorSpeed: 0
 
-
     Rectangle {
         id: bottomBar
         anchors {
@@ -156,27 +155,26 @@ Item {
                 return "assets/battery-empty-solid.svg";
         }
     }
-    // Slider pour simuler le niveau de batterie
     Slider {
         id: batterySlider
-        width: 100  // Largeur souhaitée
-        height: 10  // Hauteur souhaitée
+        width: 100
+        height: 10
         anchors {
             right: parent.right
             top: batteryImage.bottom
-            topMargin: 10 // Marge supplémentaire entre batteryImage et batterySlider
+            topMargin: 10
         }
         from: 0
         to: 100
         stepSize: 1
-        value: batteryLevel // Initialisation avec la valeur de batteryLevel
+        value: batteryLevel
         onValueChanged: {
-            batteryLevel = value; // Met à jour la propriété batteryLevel lorsque la valeur du slider change
+            batteryLevel = value;
         }
     }
     ColumnLayout {
-        anchors.centerIn: parent // Center the ColumnLayout in its parent
-        spacing: 10 // Add spacing between elements for better layout
+        anchors.centerIn: parent
+        spacing: 10
 
         RowLayout {
             CircularGauge {
@@ -185,10 +183,6 @@ Item {
                 maximumValue: 160
                 Layout.alignment: Qt.AlignHCenter
 
-                anchors {
-                    top: batteryImage.bottom
-                    margins: 10
-                }
                 style: CircularGaugeStyle {
                     tickmarkLabel: Text {
                         font.pixelSize: Math.max(6, outerRadius * 0.1)
@@ -220,10 +214,6 @@ Item {
                 maximumValue: 160
                 Layout.alignment: Qt.AlignHCenter
 
-                anchors {
-                    top: batteryImage.bottom
-                    margins: 10
-                }
                 style: CircularGaugeStyle {
                     tickmarkLabel: Text {
                         font.pixelSize: Math.max(6, outerRadius * 0.1)
@@ -255,96 +245,80 @@ Item {
                 id: speedSlider1
                 Layout.alignment: Qt.AlignHCenter
 
-                anchors {
-                    top: gauge.bottom
-                    margins: 10
-                }
                 from: 0
                 to: 160
                 stepSize: 1
                 value: navigationControl.leftMotorSpeed
 
-                // Uncomment this to update speed display dynamically
                 onValueChanged: {
-                    //navigationControl.setSpeed(value);
                     navigationControl.leftMotorSpeed = value;
-                 }
+                }
             }
             Slider {
                 id: speedSlider2
                 Layout.alignment: Qt.AlignHCenter
 
-                anchors {
-                    top: gauge.bottom
-                    margins: 10
-                }
                 from: 0
                 to: 160
                 stepSize: 1
                 value: navigationControl.rightMotorSpeed
 
-                // Uncomment this to update speed display dynamically
                 onValueChanged: {
-                    //navigationControl.setSpeed(value);
                     navigationControl.rightMotorSpeed = value;
-                 }
+                }
             }
         }
 
         Connections {
             target: navigationControl
-            onCurrentSpeedChanged: {
-                gauge.value = leftMotorSpeed;
-            }
-        }
-
-        Connections {
-            target: navigationControl
-            onCurrentSpeedChanged: {
-                gauge.value = rightMotorSpeed;
+            function onCurrentSpeedChanged() {
+                gauge1.value = navigationControl.leftMotorSpeed;
+                gauge2.value = navigationControl.rightMotorSpeed;
             }
         }
 
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
             spacing: 10
-            anchors {
-                top: speedSlider.bottom
-                margins: 10
-            }
             Button {
                 text: "Avancer"
                 onClicked: {
-                    //navigationControl.forward();
                     speedSlider1.value += 10;
                     speedSlider2.value += 10;
-
                 }
             }
 
             Button {
                 text: "Reculer"
                 onClicked: {
-                    //navigationControl.backward();
                     speedSlider1.value -= 10;
-                    speedSlider2.value -= 10;                 }
+                    speedSlider2.value -= 10;
+                }
             }
 
             Button {
                 text: "Gauche"
                 onClicked: {
                     speedSlider1.value += 10;
-                    //navigationControl.left();
+                    speedSlider2.value -= 10;
                 }
             }
 
             Button {
                 text: "Droite"
                 onClicked: {
+                    speedSlider1.value -= 10;
                     speedSlider2.value += 10;
-                    //navigationControl.right();
                 }
             }
+        }
+
+        Text {
+            id: speedText
+            text: "Speed: " + navigationControl.currentSpeed
+            font.pixelSize: 20
+            color: "black"
+            Layout.alignment: Qt.AlignHCenter
         }
     }
 }

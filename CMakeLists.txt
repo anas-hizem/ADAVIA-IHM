@@ -38,8 +38,6 @@ else()
           ${PROJECT_SOURCES}
           system.h system.cpp
           gauge.h gauge.cpp
-          tcpsocket.h tcpsocket.cpp
-          navigationcontrol.h navigationcontrol.cpp
         )
     endif()
 endif()

@@ -7,13 +7,9 @@ ADAVIA-IHM_autogen/timestamp: \
 	/home/anas/ADAVIAIHM/gauge.cpp \
 	/home/anas/ADAVIAIHM/gauge.h \
 	/home/anas/ADAVIAIHM/main.cpp \
-	/home/anas/ADAVIAIHM/navigationcontrol.cpp \
-	/home/anas/ADAVIAIHM/navigationcontrol.h \
 	/home/anas/ADAVIAIHM/qml.qrc \
 	/home/anas/ADAVIAIHM/system.cpp \
 	/home/anas/ADAVIAIHM/system.h \
-	/home/anas/ADAVIAIHM/tcpsocket.cpp \
-	/home/anas/ADAVIAIHM/tcpsocket.h \
 	/home/anas/Qt/5.15.2/gcc_64/include/QtCore/QFlags \
 	/home/anas/Qt/5.15.2/gcc_64/include/QtCore/QIODevice \
 	/home/anas/Qt/5.15.2/gcc_64/include/QtCore/QJsonDocument \
@@ -100,7 +96,6 @@ ADAVIA-IHM_autogen/timestamp: \
 	/home/anas/Qt/5.15.2/gcc_64/include/QtNetwork/QNetworkRequest \
 	/home/anas/Qt/5.15.2/gcc_64/include/QtNetwork/QSslConfiguration \
 	/home/anas/Qt/5.15.2/gcc_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
-	/home/anas/Qt/5.15.2/gcc_64/include/QtNetwork/QTcpSocket \
 	/home/anas/Qt/5.15.2/gcc_64/include/QtNetwork/qabstractsocket.h \
 	/home/anas/Qt/5.15.2/gcc_64/include/QtNetwork/qnetworkaccessmanager.h \
 	/home/anas/Qt/5.15.2/gcc_64/include/QtNetwork/qnetworkreply.h \

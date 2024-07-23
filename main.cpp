@@ -2,18 +2,12 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "system.h"
-#include "whether/appmodel.h"
-//#include "tachometerwidget.h"
-//#include "navigationcontrol.h"
 #include <QDebug>
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     QGuiApplication app(argc, argv);
-
-    //qmlRegisterType<TachometerWidget>("CustomComponents", 1, 0, "TachometerWidget");
 
     // Instantiate your system object using the class keyword
     class system m_systemHandler;
@@ -28,9 +22,6 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("systemHandler", &m_systemHandler);
 
 
-    // Expose NavigationControl to QML
-    //NavigationControl navigationControl;
-    //engine.rootContext()->setContextProperty("navigationControl", &navigationControl);
 
 
     // Load the main QML file

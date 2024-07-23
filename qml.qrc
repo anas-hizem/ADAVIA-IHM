@@ -56,30 +56,15 @@
         <file>music/02.Let.s.Get.Excited.mp3</file>
         <file>music/03.Chasing.Pavements.mp3</file>
         <file>music/03.Superwoman.mp3</file>
-        <file>Weather.qml</file>
-        <file>whether/components/BigForecastIcon.qml</file>
-        <file>whether/components/ForecastIcon.qml</file>
-        <file>whether/components/WeatherIcon.qml</file>
-        <file>whether/icons/ic_launcher.png</file>
-        <file>whether/icons/weather-few-clouds.png</file>
-        <file>whether/icons/weather-fog.png</file>
-        <file>whether/icons/weather-haze.png</file>
-        <file>whether/icons/weather-icy.png</file>
-        <file>whether/icons/weather-overcast.png</file>
-        <file>whether/icons/weather-showers.png</file>
-        <file>whether/icons/weather-sleet.png</file>
-        <file>whether/icons/weather-snow.png</file>
-        <file>whether/icons/weather-storm.png</file>
-        <file>whether/icons/weather-sunny-very-few-clouds.png</file>
-        <file>whether/icons/weather-sunny.png</file>
-        <file>whether/icons/weather-thundershower.png</file>
-        <file>whether/appmodel.cpp</file>
-        <file>whether/appmodel.h</file>
-        <file>whether/main.cpp</file>
-        <file>whether/weatherinfo.qml</file>
         <file>assets/moins.png</file>
         <file>assets/plus.png</file>
         <file>assets/spotify.png</file>
         <file>assets/spotifyimg.png</file>
+        <file>Map.qml</file>
+        <file>Info.qml</file>
+        <file>assets/violetcircle.png</file>
+        <file>assets/redcircle.png</file>
+        <file>assets/greensquare.png</file>
+        <file>assets/bluetriangle.png</file>
     </qresource>
 </RCC>
