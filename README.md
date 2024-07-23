@@ -1,7 +1,7 @@
-# Simulation de Chemin avec General Magic
+# Recherche de Destination avec General Magic
 ## Description
 
-Ce projet utilise le SDK Maps de General Magic pour implémenter une fonctionnalité de simulation de chemin dans une application Qt. Grâce à ce SDK, vous pouvez afficher des cartes interactives, tracer des itinéraires, et simuler la navigation avec des instructions vocales et des prévisions d'arrivée. Ce guide vous permettra de configurer et d'utiliser les fonctionnalités de simulation de chemin du SDK dans votre propre application Qt.
+Ce projet utilise le SDK Maps de General Magic pour implémenter une fonctionnalité de recherche textuelle de destinations dans une application Qt. Les utilisateurs peuvent saisir des termes de recherche pour trouver des localisations, afficher des suggestions basées sur la proximité, et choisir la destination exacte. Ce guide vous aidera à configurer et à utiliser la recherche textuelle avec le SDK General Magic dans votre application Qt.
 
 ## Contexte
 
@@ -14,6 +14,7 @@ Avant de commencer, assurez-vous que vous avez les éléments suivants installé
 1. **Qt Framework** : Pour le développement de l'interface utilisateur avec QML et C++ (Version 5.15 ou supérieure) . 
 2. **General Magic SDK** : Pour la simulation de chemin et la gestion des itinéraires.
 3. **Clé API Magic Lane** : Obtenez une clé API depuis le site de Magic Lane.
+4. **Environnement de Développement**: Un IDE compatible avec Qt, tel que Qt Creator, est recommandé pour le développement.
 ## Installation
 
 ### 1. Installer Qt Framework
@@ -67,54 +68,157 @@ LIBS += -L/chemin/vers/general-magic-sdk/lib -lgeneral-magic
 2. **Code QML de Base pour Afficher une Carte** :
 
    ```qml
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Window 2.12
+import GeneralMagic 2.0
 
-   import QtQuick 2.12
-   import QtQuick.Window 2.12
-   import GeneralMagic 2.0
+Window {
+    visible: true
+    width: 640
+    height: 480
+    title: qsTr("Free Text Search Example")
 
-    Window {
-        visible: true
-        width: 640; height: 480
-        title: qsTr("Simple Map")
-    
-        MapView {
-            id: mapView
-            anchors.fill: parent
-            viewAngle: 0
-            gesturesEnabled: true
-        }
-    
-        Component.onCompleted: {
-            ServicesManager.settings.token = __my_secret_token;
-            ServicesManager.settings.mapLanguage = CommonSettings.NativeLanguage;
-            ServicesManager.settings.allowInternetConnection = true;
-            ServicesManager.contentUpdater(ContentItem.Type.RoadMap).autoApplyWhenReady = true;
-            ServicesManager.contentUpdater(ContentItem.Type.RoadMap).update();
-            ServicesManager.logLevel = ServicesManager.Error;
+    property var updater: ServicesManager.contentUpdater(ContentItem.Type.RoadMap)
+    Component.onCompleted: {
+        ServicesManager.settings.token = "__my_secret_token"; // Remplacez par votre clé API
+        ServicesManager.logLevel = ServicesManager.Error;
+        ServicesManager.settings.allowInternetConnection = true;
+        updater.autoApplyWhenReady = true;
+        updater.update();
+    }
+
+    Timer {
+        id: searchTimer
+        interval: 500
+        onTriggered: {
+            searchService.searchNow();
         }
     }
+
+    SearchService {
+        id: searchService
+        filter: searchBar.text
+        searchMapPOIs: true
+        searchAddresses: true
+        limit: 10
+
+        function searchNow() {
+            searchTimer.stop();
+            cancel();
+            referencePoint = mapView.cursorWgsPosition();
+            search();
         }
+    }
+
+    MapView {
+        id: mapView
+        anchors.fill: parent
+        gesturesEnabled: true
+
+        Component.onCompleted: mapView.centerOnCoordinates(ServicesManager.createCoordinates(45.465361, 9.184940), 67);
+
+        ColumnLayout {
+            anchors.fill: parent
+            anchors.topMargin: 15
+            anchors.leftMargin: 15
+            anchors.rightMargin: 15
+            anchors.bottomMargin: 30
+
+            TextField {
+                id: searchBar
+                Layout.fillWidth: true
+                placeholderText: qsTr("Where would you like to go?")
+                onTextChanged: searchTimer.restart()
+                onEditingFinished: searchService.searchNow()
+            }
+
+            Rectangle {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                color: Qt.rgba(0,0,0,0.5)
+                visible: searchBar.focus
+                ListView {
+                    id: searchList
+                    anchors.fill: parent
+                    clip: true
+                    model: searchService
+                    function distance(meters)
+                    {
+                        return meters >= 1000 ? (meters / 1000.).toFixed(3) + " Km" :  meters.toFixed(0) + " m";
+                    }
+                    delegate: Item {
+                        height: row.height
+                        RowLayout {
+                            id: row
+                            IconView {
+                                iconSource: landmark.icon
+                                Layout.maximumHeight: row.height
+                                Layout.maximumWidth: row.height
+                                width: height
+                                height: row.height
+                            }
+                            ColumnLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: landmark.name + " (" + searchList.distance(landmark.coordinates.distance(searchService.referencePoint)) + ")"
+                                    color: "white"
+                                    font.pixelSize: 16
+                                    wrapMode: Text.WrapAnywhere
+                                }
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: landmark.description
+                                    color: "white"
+                                    font.pixelSize: 14
+                                    font.italic: true
+                                    wrapMode: Text.WrapAnywhere
+                                }
+                            }
+                        }
+                        MouseArea {
+                            anchors.fill: row
+                            onClicked: {
+                                mapView.centerOnCoordinates(searchService.get(index).coordinates, -1);
+                                searchBar.focus = true;
+                            }
+                        }
+                    }
+                }
+            }
+            Item {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+            }
+            RowLayout {
+                Button {
+                    enabled: searchService.length
+                    text: "Highlight list on the map "
+                    onClicked:  {
+                        if (mapView.zoomLevel < 65)
+                            mapView.zoomLevel = 65;
+                        mapView.highlightLandmarkList(searchService)
+                    }
+                }
+                Button {
+                    text: "Hide Highlighted list"
+                    onClicked: mapView.hideHighlights()
+                }
+            }
+        }
+    }
+}
+
 
    ```
 
 
-### 3. Simulation de Chemin
 
-**Démarrez la simulation dans votre interface QML** :
-  ```qml
-Button
-{
-    enabled: mapView.preferences.routeCollection.mainRoute.valid
-    text: navigation.active ? "Stop simulation" : "Start simulation"
-    onClicked: navigation.active = !navigation.active
-}
-  ```
 
-## Dépannage
-
-- **Problèmes de Configuration** : Assurez-vous que les chemins d'accès aux bibliothèques et aux en-têtes sont correctement configurés.
-- **Erreurs de Compilation** : Vérifiez que toutes les dépendances sont correctement installées et que les versions sont compatibles.
-- **Problèmes d'API** : Assurez-vous que votre clé API est valide et que les quotas d'utilisation ne sont pas dépassés.
+## Réalisation
 
 ## Conclusion
 
