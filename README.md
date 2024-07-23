@@ -67,74 +67,15 @@ LIBS += -L/chemin/vers/general-magic-sdk/lib -lgeneral-magic
 
 2. **Code QML de Base pour Afficher une Carte** :
 
-   ```qml
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-import QtQuick.Window 2.12
-import GeneralMagic 2.0
-
-Window {
-    visible: true
-    width: 640
-    height: 480
-    title: qsTr("Free Text Search Example")
-
-    property var updater: ServicesManager.contentUpdater(ContentItem.Type.RoadMap)
-    Component.onCompleted: {
-        ServicesManager.settings.token = "__my_secret_token"; // Remplacez par votre clé API
-        ServicesManager.logLevel = ServicesManager.Error;
-        ServicesManager.settings.allowInternetConnection = true;
-        updater.autoApplyWhenReady = true;
-        updater.update();
-    }
-
-    Timer {
-        id: searchTimer
-        interval: 500
-        onTriggered: {
-            searchService.searchNow();
-        }
-    }
-
-    SearchService {
-        id: searchService
-        filter: searchBar.text
-        searchMapPOIs: true
-        searchAddresses: true
-        limit: 10
-
-        function searchNow() {
-            searchTimer.stop();
-            cancel();
-            referencePoint = mapView.cursorWgsPosition();
-            search();
-        }
-    }
-
-    MapView {
-        id: mapView
-        anchors.fill: parent
-        gesturesEnabled: true
-
-        Component.onCompleted: mapView.centerOnCoordinates(ServicesManager.createCoordinates(45.465361, 9.184940), 67);
-
-        ColumnLayout {
-            anchors.fill: parent
-            anchors.topMargin: 15
-            anchors.leftMargin: 15
-            anchors.rightMargin: 15
-            anchors.bottomMargin: 30
-
-            TextField {
-                id: searchBar
-                Layout.fillWidth: true
-                placeholderText: qsTr("Where would you like to go?")
-                onTextChanged: searchTimer.restart()
-                onEditingFinished: searchService.searchNow()
-            }
-
-            Rectangle {
+   ```qml 
+TextField {
+    id: searchBar
+    Layout.fillWidth: true
+    placeholderText: qsTr("Where would you like to go?")
+    onTextChanged: searchTimer.restart()
+    onEditingFinished: searchService.searchNow()
+}
+Rectangle {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 color: Qt.rgba(0,0,0,0.5)
@@ -189,28 +130,6 @@ Window {
                     }
                 }
             }
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-            }
-            RowLayout {
-                Button {
-                    enabled: searchService.length
-                    text: "Highlight list on the map "
-                    onClicked:  {
-                        if (mapView.zoomLevel < 65)
-                            mapView.zoomLevel = 65;
-                        mapView.highlightLandmarkList(searchService)
-                    }
-                }
-                Button {
-                    text: "Hide Highlighted list"
-                    onClicked: mapView.hideHighlights()
-                }
-            }
-        }
-    }
-}
 
 
    ```
