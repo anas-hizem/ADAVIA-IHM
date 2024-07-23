@@ -75,64 +75,8 @@ TextField {
     onTextChanged: searchTimer.restart()
     onEditingFinished: searchService.searchNow()
 }
-Rectangle {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                color: Qt.rgba(0,0,0,0.5)
-                visible: searchBar.focus
-                ListView {
-                    id: searchList
-                    anchors.fill: parent
-                    clip: true
-                    model: searchService
-                    function distance(meters)
-                    {
-                        return meters >= 1000 ? (meters / 1000.).toFixed(3) + " Km" :  meters.toFixed(0) + " m";
-                    }
-                    delegate: Item {
-                        height: row.height
-                        RowLayout {
-                            id: row
-                            IconView {
-                                iconSource: landmark.icon
-                                Layout.maximumHeight: row.height
-                                Layout.maximumWidth: row.height
-                                width: height
-                                height: row.height
-                            }
-                            ColumnLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
-                                Text {
-                                    Layout.fillWidth: true
-                                    text: landmark.name + " (" + searchList.distance(landmark.coordinates.distance(searchService.referencePoint)) + ")"
-                                    color: "white"
-                                    font.pixelSize: 16
-                                    wrapMode: Text.WrapAnywhere
-                                }
-                                Text {
-                                    Layout.fillWidth: true
-                                    text: landmark.description
-                                    color: "white"
-                                    font.pixelSize: 14
-                                    font.italic: true
-                                    wrapMode: Text.WrapAnywhere
-                                }
-                            }
-                        }
-                        MouseArea {
-                            anchors.fill: row
-                            onClicked: {
-                                mapView.centerOnCoordinates(searchService.get(index).coordinates, -1);
-                                searchBar.focus = true;
-                            }
-                        }
-                    }
-                }
-            }
 
-
-   ```
+  ```
 
 
 
