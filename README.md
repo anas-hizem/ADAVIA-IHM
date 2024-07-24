@@ -70,18 +70,4 @@ Pour intégrer et utiliser les conditions météorologiques dans votre projet :
 
 ![Capture d’écran du 2024-07-24 13-34-32](https://github.com/user-attachments/assets/72927e67-4cc1-4382-b4c4-3610bdb0907c)
 
-## Prochaines Étapes
-
-1. **Optimisation de l'Interface :**
-   - Améliorer l'apparence visuelle des icônes et des affichages pour une meilleure intégration avec le design global de l'interface.
-
-2. **Ajout de Fonctionnalités :**
-   - Intégrer des fonctionnalités supplémentaires comme la prévision horaire ou des alertes météorologiques.
-
-3. **Tests Étendus :**
-   - Effectuer des tests sur différents appareils et configurations pour garantir une performance et une fiabilité optimales.
-
-4. **Documentation et Déploiement :**
-   - Compléter la documentation pour inclure les nouvelles fonctionnalités.
-   - Préparer le déploiement de la fonctionnalité dans l'interface finale de la navette autonome.
 
