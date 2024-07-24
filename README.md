@@ -68,6 +68,7 @@ Pour intégrer et utiliser les conditions météorologiques dans votre projet :
 
 
 
+![Capture d’écran du 2024-07-24 13-34-32](https://github.com/user-attachments/assets/72927e67-4cc1-4382-b4c4-3610bdb0907c)
 
 ## Prochaines Étapes
 
