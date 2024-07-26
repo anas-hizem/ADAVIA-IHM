@@ -69,10 +69,6 @@ L'interface de streaming de caméra est conçue pour être intégrée dans un sy
    - Tests des contrôles de réglage pour s'assurer qu'ils fonctionnent correctement avec les flux vidéo.
 
 
-![Capture d’écran du 2024-07-24 18-57-19](https://github.com/user-attachments/assets/c60e1b1b-da15-4be4-8930-56d53cce93f3)
-
-
-
 ## Perspectives
 
 1. **Interaction Matérielle**
@@ -82,3 +78,8 @@ L'interface de streaming de caméra est conçue pour être intégrée dans un sy
 2. **Réception et Envoi des Données**
    - Implémentez les mécanismes nécessaires pour recevoir les données des caméras et envoyer les commandes de réglage.
    - Vérifiez la synchronisation des flux vidéo avec les commandes de réglage pour une expérience utilisateur fluide.
+
+
+![Capture d’écran du 2024-07-24 18-57-19](https://github.com/user-attachments/assets/c60e1b1b-da15-4be4-8930-56d53cce93f3)
+
+
