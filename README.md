@@ -67,9 +67,10 @@ L'interface de streaming de caméra est conçue pour être intégrée dans un sy
 3. **Tests**
    - Vérification de l'affichage des flux vidéo en temps réel.
    - Tests des contrôles de réglage pour s'assurer qu'ils fonctionnent correctement avec les flux vidéo.
-   - 
+
 
 ![Capture d’écran du 2024-07-24 18-57-19](https://github.com/user-attachments/assets/c60e1b1b-da15-4be4-8930-56d53cce93f3)
+
 
 
 ## Perspectives
