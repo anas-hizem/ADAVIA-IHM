@@ -1,73 +1,46 @@
-# Intégration des Conditions Météorologiques dans l'Interface ADAVIA
+# Développement de l'Interface de Détection Ultrasonique
 
-## Description
+## a. Description
+L'interface de détection ultrasonique est conçue pour afficher en temps réel les distances mesurées par les capteurs ultrasoniques installés sur une navette autonome. Cette interface fournit une visualisation intuitive des distances aux obstacles pour améliorer la navigation et la sécurité du véhicule.
 
-Cette documentation couvre l'intégration des conditions météorologiques dans l'interface utilisateur du projet ADAVIA, une navette autonome. L'objectif est de fournir des informations météorologiques en temps réel, telles que la température et l'humidité, directement sur le tableau de bord principal. L'intégration utilise l'API OpenWeatherMap pour récupérer les données météorologiques.
+## b. Contexte
+Ce projet fait partie du développement d'un système d'interface homme-machine (IHM) pour la gestion d'une navette autonome. L'interface de détection ultrasonique est un composant clé pour la navigation en temps réel, permettant aux opérateurs et aux systèmes automatisés de prendre des décisions basées sur les données des capteurs ultrasoniques.
 
-## Prérequis
+## c. Prérequis
+- **Qt** (version 5.15 ou supérieure)
+- **Qt Quick** (pour la création d'interfaces utilisateur modernes)
+- **QML** (pour la définition de l'interface utilisateur)
+- **C++** (pour la gestion des données des capteurs)
+- **Capteurs ultrasoniques** (connectés à la navette)
 
-Avant d'utiliser cette fonctionnalité, assurez-vous d'avoir :
+## d. Composants Clés
+1. **UltrasonSensor.qml**: Composant QML principal pour afficher les données des capteurs.
+2. **Canvas**: Utilisé pour dessiner les ondes ultrasoniques autour des capteurs.
+3. **Repeater**: Pour créer plusieurs instances de capteurs avec des positions et angles spécifiques.
+4. **Connections**: Pour lier les changements de propriétés C++ aux éléments QML.
+5. **Text**: Pour afficher les valeurs des distances et autres informations de débogage.
 
-- **Qt Framework** : Qt 5.15 ou version ultérieure
-- **Qt Creator** : IDE pour le développement avec Qt
-- **API OpenWeatherMap** : Clé API valide pour accéder aux données météorologiques
-- **Connaissances en QML et C++** : Pour comprendre et modifier les composants
+## e. Utilisation
+Pour utiliser l'interface de détection ultrasonique, il suffit d'intégrer le fichier `UltrasonSensor.qml` dans votre projet Qt Quick et de s'assurer que les valeurs des capteurs sont mises à jour correctement à partir du backend C++. Les valeurs des capteurs doivent être connectées aux propriétés QML correspondantes pour que les distances et les ondes soient affichées en temps réel.
 
-## Fonctionnalités
+## f. Réalisation
+### 1. Création de l'interface
+- **Image de la navette**: Ajoutée pour un contexte visuel.
+- **Capteurs ultrasoniques**: Placés autour de la navette avec des positions et des angles spécifiques.
+- **Dessins des ondes**: Utilisation de `Canvas` pour dessiner les ondes ultrasoniques en fonction des distances mesurées.
 
-- **Affichage des Données Météorologiques :**
-  - Température actuelle
-  - Humidité
-  - Description des conditions météorologiques
-  - Icônes représentant les conditions météorologiques
+### 2. Débogage et affichage des valeurs
+- **Éléments Text**: Ajoutés pour afficher les distances et les angles de chaque capteur.
+- **Console logs**: Utilisés pour vérifier les valeurs des propriétés et les calculs des ondes.
 
-- **Gestion de l'État de Chargement :**
-  - Affichage d'un message de chargement pendant la récupération des données
-  - Affichage des informations météorologiques une fois les données prêtes
+### 3. Intégration C++
+- **Propriétés QML**: Connectées aux signaux C++ pour mettre à jour les valeurs des distances en temps réel.
+- **Mise à jour des ondes**: Fonction de mise à jour du `Canvas` pour redessiner les ondes en fonction des nouvelles distances.
 
-- **Changement de Ville :**
-  - Sélection et changement de la ville pour récupérer les données météorologiques pour différentes localités
-  - Utilisation du GPS pour déterminer la localisation actuelle
+## g. Prochaine Étape
+### Interaction Matérielle et Réception des Données des Capteurs
+1. **Intégration Matérielle**: Connecter les capteurs ultrasoniques réels à la navette autonome et s'assurer qu'ils envoient les données correctes au système.
+2. **Gestion des Données**: Développer un module en C++ pour lire les données des capteurs ultrasoniques et les envoyer à l'interface QML.
+3. **Amélioration de l'Interface**: Affiner l'affichage des ondes et des alertes visuelles et sonores pour une meilleure visualisation des obstacles.
 
-## Utilisation
-
-Pour intégrer et utiliser les conditions météorologiques dans votre projet :
-
-1. **Configuration de l'API :**
-   - Obtenez une clé API d'OpenWeatherMap et configurez-la dans le modèle de données `AppModel`.
-
-2. **Intégration dans le Projet :**
-   - Incluez le fichier QML de météo dans votre interface utilisateur.
-   - Assurez-vous que les composants `WeatherInfo` et les icônes météorologiques sont correctement référencés.
-
-3. **Tests :**
-   - Vérifiez que les données météorologiques s'affichent correctement et que les interactions (comme le changement de ville) fonctionnent comme prévu.
-
-## Composants Clés
-
-- **`weatherArea` :** Conteneur principal pour l'affichage des informations météorologiques.
-  - États de chargement et prêt pour la gestion des données.
-- **`AppModel` :** Modèle de données pour la récupération et la gestion des données météorologiques.
-- **`BigForecastIcon` :** Affiche les conditions météorologiques actuelles avec une grande icône.
-- **`ForecastIcon` :** Affiche les prévisions météorologiques pour les prochains jours.
-
-## Réalisation
-
-1. **Développement du Composant Météo :**
-   - Création du `Rectangle` principal pour afficher les données météorologiques.
-   - Implémentation des états de chargement et prêt pour gérer les données en attente.
-   - Utilisation des composants `BigForecastIcon` et `ForecastIcon` pour afficher les informations météorologiques actuelles et les prévisions.
-
-2. **Intégration de l'API :**
-   - Connexion à l'API OpenWeatherMap pour récupérer les données météorologiques.
-   - Mise en place de la logique pour la mise à jour des données en fonction de la ville sélectionnée ou de la localisation GPS.
-
-3. **Test et Validation :**
-   - Tests pour vérifier que les données sont récupérées correctement et que l'affichage est conforme aux attentes.
-   - Validation des interactions utilisateur pour s'assurer que les fonctionnalités de changement de ville et de rafraîchissement fonctionnent comme prévu.
-
-
-
-![Capture d’écran du 2024-07-24 13-34-32](https://github.com/user-attachments/assets/72927e67-4cc1-4382-b4c4-3610bdb0907c)
-
-
+Avec ces étapes, l'interface de détection ultrasonique sera prête à être testée dans un environnement réel et à fournir des informations précieuses pour la navigation autonome.
