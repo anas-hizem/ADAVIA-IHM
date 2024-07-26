@@ -4,10 +4,6 @@
 
 Ce projet vise à développer une interface de streaming de caméra pour un système de surveillance ou un véhicule autonome. L'interface affiche les flux vidéo en direct de quatre caméras (avant, arrière, et deux miroirs latéraux) et permet à l'utilisateur de sélectionner la caméra dont il souhaite voir le flux. En plus du flux vidéo, des contrôles de réglage pour la luminosité, le contraste, et le zoom sont également inclus.
 
-## Contexte
-
-L'interface de streaming de caméra est conçue pour être intégrée dans un système plus large de gestion de véhicule autonome ou de surveillance. Le besoin de cette interface est dicté par la nécessité de surveiller différents angles autour du véhicule pour la navigation et la sécurité. Ce développement est réalisé en utilisant Qt Quick et QML pour une intégration fluide avec les autres composants du système.
-
 ## Prérequis
 
 1. **Environnement de Développement**
@@ -47,12 +43,14 @@ L'interface de streaming de caméra est conçue pour être intégrée dans un sy
 
 2. **Sélectionner une Caméra**
    - Cliquez sur l'image représentant une caméra pour afficher son flux vidéo dans la zone de visualisation.
-
-3. **Ajuster les Réglages**
+   - 
+3. **Afficher les Flux Vidéo**
+   - Le flux vidéo de la caméra sélectionnée sera affiché en temps réel dans la zone dédiée.
+   - 
+4. **Ajuster les Réglages**
    - Utilisez les contrôles de réglage pour modifier la luminosité, le contraste et le zoom du flux vidéo sélectionné.
 
-4. **Afficher les Flux Vidéo**
-   - Le flux vidéo de la caméra sélectionnée sera affiché en temps réel dans la zone dédiée.
+
 
 ## Réalisation
 
@@ -68,6 +66,8 @@ L'interface de streaming de caméra est conçue pour être intégrée dans un sy
    - Vérification de l'affichage des flux vidéo en temps réel.
    - Tests des contrôles de réglage pour s'assurer qu'ils fonctionnent correctement avec les flux vidéo.
 
+![Capture d’écran du 2024-07-24 18-57-19](https://github.com/user-attachments/assets/c60e1b1b-da15-4be4-8930-56d53cce93f3)
+
 
 ## Perspectives
 
@@ -80,6 +80,5 @@ L'interface de streaming de caméra est conçue pour être intégrée dans un sy
    - Vérifiez la synchronisation des flux vidéo avec les commandes de réglage pour une expérience utilisateur fluide.
 
 
-![Capture d’écran du 2024-07-24 18-57-19](https://github.com/user-attachments/assets/c60e1b1b-da15-4be4-8930-56d53cce93f3)
 
 
