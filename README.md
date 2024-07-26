@@ -37,6 +37,9 @@ Pour utiliser l'interface de détection ultrasonique, il suffit d'intégrer le f
 - **Propriétés QML**: Connectées aux signaux C++ pour mettre à jour les valeurs des distances en temps réel.
 - **Mise à jour des ondes**: Fonction de mise à jour du `Canvas` pour redessiner les ondes en fonction des nouvelles distances.
 
+
+![Capture d’écran du 2024-07-25 18-23-41](https://github.com/user-attachments/assets/a1afae7c-0948-4e49-8880-d95d510f3ee7)
+
 ## g. Prochaine Étape
 ### Interaction Matérielle et Réception des Données des Capteurs
 1. **Intégration Matérielle**: Connecter les capteurs ultrasoniques réels à la navette autonome et s'assurer qu'ils envoient les données correctes au système.
