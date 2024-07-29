@@ -53,6 +53,7 @@ Le projet a été réalisé en plusieurs étapes clés :
    - Lecture des données des capteurs à partir du port série.
    - Affichage des distances sur l'interface utilisateur avec des indicateurs visuels pour les alertes d'obstacles.
 
+## Prototype
 
 ![IMG_20240726_135615_634](https://github.com/user-attachments/assets/0be39602-cd07-4f56-b385-4aecf26e3912)
 
