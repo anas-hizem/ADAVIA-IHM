@@ -53,22 +53,6 @@ Le projet a été réalisé en plusieurs étapes clés :
    - Lecture des données des capteurs à partir du port série.
    - Affichage des distances sur l'interface utilisateur avec des indicateurs visuels pour les alertes d'obstacles.
 
-## Prototype
-
-
-![IMG_20240726_135615_634](https://github.com/user-attachments/assets/a4d061e5-d0f6-4354-b401-e4a03b635732)
-
-
-![Interface de Réception et Affichage des Données Ultrasoniques](https://github.com/user-attachments/assets/183218a1-2022-4f16-afe8-946e32f6ba43)
-
-
-
-
-
-
-
-
-
 ## Tests
 
 Les tests réalisés incluent :
@@ -94,3 +78,13 @@ Le projet pourrait évoluer vers les perspectives suivantes :
 
 - **Intégration avec d'autres Systèmes** :
   - Connecter le système de capteurs à d'autres parties de l'application ou à des systèmes externes pour une analyse plus complète.
+
+
+
+## Prototype
+
+
+![IMG_20240726_135615_634](https://github.com/user-attachments/assets/a4d061e5-d0f6-4354-b401-e4a03b635732)
+
+
+![Interface de Réception et Affichage des Données Ultrasoniques](https://github.com/user-attachments/assets/183218a1-2022-4f16-afe8-946e32f6ba43)
