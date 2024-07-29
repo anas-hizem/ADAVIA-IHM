@@ -48,6 +48,12 @@ Le projet a été réalisé en plusieurs étapes clés :
    - Lecture des données des capteurs à partir du port série.
    - Affichage des distances sur l'interface utilisateur avec des indicateurs visuels pour les alertes d'obstacles.
 
+
+![IMG_20240726_135615_634](https://github.com/user-attachments/assets/0be39602-cd07-4f56-b385-4aecf26e3912)
+
+![Screenshot from 2024-07-29 15-47-33](https://github.com/user-attachments/assets/183218a1-2022-4f16-afe8-946e32f6ba43)
+
+
 ## Tests
 
 Les tests réalisés incluent :
@@ -73,29 +79,3 @@ Le projet pourrait évoluer vers les perspectives suivantes :
 
 - **Intégration avec d'autres Systèmes** :
   - Connecter le système de capteurs à d'autres parties de l'application ou à des systèmes externes pour une analyse plus complète.
-
-## Prochaines Étapes
-
-1. **Optimiser la Réception des Données** :
-   - Améliorer la gestion des données reçues pour une meilleure performance.
-
-2. **Ajouter des Fonctionnalités d'Alertes** :
-   - Implémenter des alertes plus sophistiquées pour les situations critiques.
-
-3. **Test en Conditions Réelles** :
-   - Effectuer des tests dans des environnements réels pour valider les performances du système.
-
-4. **Documentation Complète** :
-   - Rédiger une documentation détaillée pour l'utilisation et la configuration du système.
-
-## Contribution
-
-Les contributions sont les bienvenues ! Si vous souhaitez participer, veuillez suivre les étapes suivantes :
-
-1. Forkez le projet.
-2. Créez une branche pour votre fonctionnalité ou correction.
-3. Envoyez une demande de fusion (Pull Request) avec une description détaillée des modifications.
-
-## Licence
-
-Ce projet est sous la [Licence MIT](LICENSE).
