@@ -55,9 +55,9 @@ Le projet a été réalisé en plusieurs étapes clés :
 
 ## Prototype
 
-![IMG_20240726_135615_634](https://github.com/user-attachments/assets/0be39602-cd07-4f56-b385-4aecf26e3912)
+![Cablage](https://github.com/user-attachments/assets/298e344b-dd97-47d9-ac64-3dfa581dd14c)
 
-![Screenshot from 2024-07-29 15-47-33](https://github.com/user-attachments/assets/183218a1-2022-4f16-afe8-946e32f6ba43)
+![Interface de Réception et Affichage des Données Ultrasoniques](https://github.com/user-attachments/assets/183218a1-2022-4f16-afe8-946e32f6ba43)
 
 
 ## Tests
