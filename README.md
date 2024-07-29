@@ -1,84 +1,101 @@
-# Interface de Streaming de Caméra
+# Avancement du Projet : Réception et Affichage de Données Ultrasoniques
 
 ## Description
 
-Ce projet vise à développer une interface de streaming de caméra pour un système de surveillance ou un véhicule autonome. L'interface affiche les flux vidéo en direct de quatre caméras (avant, arrière, et deux miroirs latéraux) et permet à l'utilisateur de sélectionner la caméra dont il souhaite voir le flux. En plus du flux vidéo, des contrôles de réglage pour la luminosité, le contraste, et le zoom sont également inclus.
+Ce projet a pour but d'intégrer des capteurs ultrasoniques à une application Qt pour visualiser en temps réel les distances mesurées par les capteurs. Les données sont recueillies par une carte Arduino Mega 2560 et transmises à l'application via une communication série.
 
 ## Prérequis
 
-1. **Environnement de Développement**
-   - Qt Creator ou un autre éditeur compatible avec Qt/QML.
-   - Qt 6.x ou version ultérieure installée.
+### Matériel
 
-2. **Composants Matériels**
-   - Caméras compatibles avec le système (avant, arrière, et miroirs latéraux).
-   - Connecteurs et câbles nécessaires pour la connexion des caméras au système.
+- Arduino Mega 2560
+- Capteurs ultrasoniques HC-SR04 (6 unités)
+- Câbles de connexion
+- Ordinateur avec ports USB
 
-3. **Bibliothèques et Frameworks**
-   - Qt Multimedia pour la gestion des flux vidéo.
-   - Qt Quick pour le développement de l'interface utilisateur.
+### Logiciel
 
-4. **Compétences**
-   - Connaissance de Qt/QML et de la programmation en C++.
-   - Compréhension des concepts de streaming vidéo.
-
-## Composants Clés
-
-1. **Image de la Navette**
-   - Affiche les positions des caméras sur une image de vue de dessus de la navette.
-
-2. **Flux Vidéo**
-   - Éléments pour afficher les flux vidéo en direct des caméras sélectionnées.
-
-3. **Sélecteur de Caméra**
-   - Interface pour sélectionner la caméra dont le flux vidéo sera affiché.
-
-4. **Contrôles de Réglage**
-   - Boutons pour ajuster la luminosité, le contraste et le zoom des flux vidéo.
+- Arduino IDE
+- Qt Creator
+- Bibliothèques Qt nécessaires
 
 ## Utilisation
 
-1. **Lancer l'application**
-   - Démarrez l'application via Qt Creator ou l'exécutable approprié.
+1. **Préparation de l'Arduino** :
+   - Connectez les capteurs ultrasoniques à la carte Arduino en suivant les instructions spécifiques pour le branchement des pins.
+   - Téléversez le code Arduino fourni sur la carte pour commencer à lire les données des capteurs.
 
-2. **Sélectionner une Caméra**
-   - Cliquez sur l'image représentant une caméra pour afficher son flux vidéo dans la zone de visualisation.
-   - 
-3. **Afficher les Flux Vidéo**
-   - Le flux vidéo de la caméra sélectionnée sera affiché en temps réel dans la zone dédiée.
-   - 
-4. **Ajuster les Réglages**
-   - Utilisez les contrôles de réglage pour modifier la luminosité, le contraste et le zoom du flux vidéo sélectionné.
+2. **Configuration de Qt** :
+   - Configurez la connexion série entre l'Arduino et l'application Qt.
+   - Intégrez le module de réception des données série dans votre application Qt.
 
-
+3. **Démarrage de l'Application** :
+   - Lancez l'application Qt pour afficher les données en temps réel.
+   - Surveillez les distances mesurées par les capteurs via l'interface utilisateur.
 
 ## Réalisation
 
-1. **Développement de l'Interface**
-   - Création des éléments QML pour afficher l'image de la navette et les positions des caméras.
-   - Intégration des flux vidéo en direct en utilisant Qt Multimedia.
+Le projet a été réalisé en plusieurs étapes clés :
 
-2. **Implémentation des Contrôles**
-   - Développement des contrôles pour ajuster la luminosité, le contraste, et le zoom des flux vidéo.
-   - Ajout des fonctions de sélection de caméra et de mise à jour dynamique de l'affichage.
+1. **Développement du Code Arduino** :
+   - Programmation pour lire les distances des capteurs et les envoyer via le port série.
 
-3. **Tests**
-   - Vérification de l'affichage des flux vidéo en temps réel.
-   - Tests des contrôles de réglage pour s'assurer qu'ils fonctionnent correctement avec les flux vidéo.
+2. **Développement de l'Interface Qt** :
+   - Création de l'interface utilisateur pour afficher les distances.
+   - Mise en place de la communication série pour recevoir les données en temps réel.
 
-![Capture d’écran du 2024-07-24 18-57-19](https://github.com/user-attachments/assets/c60e1b1b-da15-4be4-8930-56d53cce93f3)
+3. **Intégration des Données** :
+   - Lecture des données des capteurs à partir du port série.
+   - Affichage des distances sur l'interface utilisateur avec des indicateurs visuels pour les alertes d'obstacles.
 
+## Tests
+
+Les tests réalisés incluent :
+
+- **Vérification des Connexions** :
+  - Validation des connexions des capteurs et de la communication série.
+  
+- **Validation des Données** :
+  - Vérification que les distances mesurées sont correctement transmises et affichées.
+
+- **Tests de l'Interface Utilisateur** :
+  - Assurer que l'interface utilisateur réagit correctement aux changements de données et affiche les alertes d'obstacles comme prévu.
 
 ## Perspectives
 
-1. **Interaction Matérielle**
-   - Assurez-vous que le matériel des caméras est correctement configuré et intégré au système.
-   - Évaluez les performances des flux vidéo en fonction de la qualité et de la latence des caméras.
+Le projet pourrait évoluer vers les perspectives suivantes :
 
-2. **Réception et Envoi des Données**
-   - Implémentez les mécanismes nécessaires pour recevoir les données des caméras et envoyer les commandes de réglage.
-   - Vérifiez la synchronisation des flux vidéo avec les commandes de réglage pour une expérience utilisateur fluide.
+- **Amélioration des Alertes** :
+  - Ajouter des alertes visuelles et sonores pour des distances critiques.
 
+- **Optimisation de l'Interface** :
+  - Améliorer l'interface utilisateur pour une meilleure lisibilité et réactivité.
 
+- **Intégration avec d'autres Systèmes** :
+  - Connecter le système de capteurs à d'autres parties de l'application ou à des systèmes externes pour une analyse plus complète.
 
+## Prochaines Étapes
 
+1. **Optimiser la Réception des Données** :
+   - Améliorer la gestion des données reçues pour une meilleure performance.
+
+2. **Ajouter des Fonctionnalités d'Alertes** :
+   - Implémenter des alertes plus sophistiquées pour les situations critiques.
+
+3. **Test en Conditions Réelles** :
+   - Effectuer des tests dans des environnements réels pour valider les performances du système.
+
+4. **Documentation Complète** :
+   - Rédiger une documentation détaillée pour l'utilisation et la configuration du système.
+
+## Contribution
+
+Les contributions sont les bienvenues ! Si vous souhaitez participer, veuillez suivre les étapes suivantes :
+
+1. Forkez le projet.
+2. Créez une branche pour votre fonctionnalité ou correction.
+3. Envoyez une demande de fusion (Pull Request) avec une description détaillée des modifications.
+
+## Licence
+
+Ce projet est sous la [Licence MIT](LICENSE).
