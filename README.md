@@ -2,16 +2,21 @@
 
 ## Description
 
-Ce projet a pour but d'intégrer des capteurs ultrasoniques à une application Qt pour visualiser en temps réel les distances mesurées par les capteurs. Les données sont recueillies par une carte Arduino Mega 2560 et transmises à l'application via une communication série.
+Le projet se concentre sur l'intégration et l'affichage des données provenant de capteurs ultrasoniques dans une application Qt. Les capteurs ultrasoniques mesurent la distance à des objets et transmettent ces informations en temps réel. Le but est de lire ces données avec une carte Arduino Mega 2560, puis de les afficher de manière claire et intuitive dans l'interface utilisateur de l'application Qt.
+## Objectifs
+
+1. **Lire les Données des Capteurs Ultrasoniques** : Développer le code nécessaire pour lire les distances mesurées par les capteurs ultrasoniques à l'aide de l'Arduino.
+2. **Transmettre les Données à l'Application Qt** : Établir une communication série entre l'Arduino et l'application Qt pour envoyer les données de distance.
+3. **Afficher les Données en Temps Réel** : Créer une interface graphique dans Qt Quick pour afficher les distances mesurées par les capteurs ultrasoniques en temps réel.
 
 ## Prérequis
 
 ### Matériel
 
-- Arduino Mega 2560
-- Capteurs ultrasoniques HC-SR04 (6 unités)
-- Câbles de connexion
-- Ordinateur avec ports USB
+- **Arduino Mega 2560** : Microcontrôleur pour lire les données des capteurs ultrasoniques et envoyer les données via le port série
+- **Capteurs ultrasoniques HC-SR04 (6 unités)** : Six capteurs ultrasoniques pour mesurer les distances à différents points autour du véhicule.
+- **Câbles de connexion** : Pour relier les capteurs à l'Arduino et l'Arduino à l'ordinateur
+- **Ordinateur** : Avec Arduino IDE pour le développement et Qt Creator pour la création de l'application.
 
 ### Logiciel
 
