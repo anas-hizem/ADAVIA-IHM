@@ -15,7 +15,6 @@ Rectangle {
     anchors {
         top: parent.top
     }
-    radius: 20
     function distance(meters) {
         return meters >= 1000 ? (meters / 1000).toFixed(3) + " Km" : meters.toFixed(0) + " m";
     }
@@ -30,6 +29,294 @@ Rectangle {
         updater.autoApplyWhenReady = true
         updater.update()
     }
+
+    Rectangle {
+        width: mapArea.width
+        height: mapArea.height
+        radius: 20
+        MapView
+        {
+            id:geomapview
+            anchors.fill : mapArea
+            clip: true
+            width: mapArea.width
+            height: mapArea.height
+            viewAngle: 35
+            cursorVisibility: false
+            viewPerspective: MapView.ViewPerspective.View3D
+            buildingsVisibility: MapView.BuildingsVisibility.Show3D
+            detailsQualityLevel: MapView.DetailsQualityLevel.Medium
+            onRouteSelected:
+            {
+                routeCollection.mainRoute = route
+                centerOnRoute(route)
+                console.log("Selected Route Is : " + route.summary)
+            }
+            ColumnLayout {
+                        anchors.fill: parent
+                        anchors.topMargin: 15
+                        anchors.leftMargin: 15
+                        anchors.rightMargin: 700
+                        anchors.bottomMargin: 30
+
+                TextField {
+                    id: searchBar
+                    Layout.fillWidth: true
+                    placeholderText: qsTr("Where would you like to go?")
+                    onTextChanged: searchTimer.restart()
+                    onEditingFinished: searchService.searchNow()
+                }
+                Rectangle {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    color: Qt.rgba(0,0,0,0.5)
+                    visible: searchBar.focus
+                    ListView {
+                        id: searchList
+                        anchors.fill: parent
+                        clip: true
+                        model: searchService
+                        function distance(meters)
+                        {
+                            return meters >= 1000 ? (meters / 1000.).toFixed(3) + " Km" :  meters.toFixed(0) + " m";
+                        }
+                        delegate: Item {
+                            height: row.height
+                            RowLayout {
+                                id: row
+                                spacing: 15
+                                IconView {
+                                    iconSource: landmark.icon
+                                    Layout.maximumHeight: row.height
+                                    Layout.maximumWidth: row.height
+                                    width: 40
+                                    height: 40
+                                }
+                                ColumnLayout {
+                                    Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: landmark.name + " (" + searchList.distance(landmark.coordinates.distance(searchService.referencePoint)) + ")"
+                                        color: "white"
+                                        font.pixelSize: 16
+                                        wrapMode: Text.WrapAnywhere
+                                    }
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: landmark.description
+                                        color: "white"
+                                        font.pixelSize: 13
+                                        font.italic: true
+                                        wrapMode: Text.WrapAnywhere
+                                    }
+                                    Rectangle{
+                                        Layout.fillWidth: true
+                                        color: "white"
+                                        height: 1
+                                    }
+                                }
+                            }
+                            MouseArea {
+                                anchors.fill: row
+                                onClicked: {
+                                    destinationCoordinates = searchService.get(index).coordinates;
+                                    console.log("Destination coordinates:", destinationCoordinates);
+                                    geomapview.centerOnCoordinates(searchService.get(index).coordinates, -1);
+                                    searchBar.focus = false;                            }
+                            }
+                        }
+                    }
+                }
+                Item {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
+            }
+            Rectangle{
+                z:5
+                visible: navigationService.active
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 20
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+                implicitHeight: 140
+                implicitWidth: 420
+                radius: 20
+                color: "#439df3"
+
+                RowLayout{
+                    width: parent.width
+                    spacing: 0
+                    anchors.centerIn: parent
+                    Item{
+                        Layout.alignment: Qt.AlignLeft
+                        Layout.preferredWidth: parent.width * 0.33
+                        Layout.fillHeight: true
+                        RowLayout{
+                            anchors.centerIn: parent
+                            spacing: 20
+                            DynamicIconView {
+                                width: 100
+                                height: 100
+                                arrowInner: "White"
+                                arrowOuter: "White"
+                                slotInner: "Grey"
+                                slotOuter: arrowOuter
+                                iconSource: navigationService.currentInstruction.nextTurnDynamicIcon
+                            }
+
+                            Rectangle{
+                                width: 1
+                                height: 100
+                                color: "#5cb1ff"
+                            }
+                        }
+                    }
+                    ColumnLayout{
+                        Layout.fillWidth: true
+                        spacing: 5
+                        Label {
+                            Layout.alignment: Qt.AlignLeft
+                            font.pixelSize: 24
+                            color: "white"
+                            text: distance(navigationService.currentInstruction.distanceToNextTurn)
+                        }
+                        Label {
+                            Layout.alignment: Qt.AlignLeft
+                            color: "white"
+                            Layout.fillWidth: true
+                            font.pixelSize: 18
+                            text: navigationService.currentInstruction.nextStreetName
+                        }
+                    }
+                }
+            }
+            Rectangle{
+                z:5
+                visible: navigationService.active
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 20
+                anchors.right: parent.right
+                anchors.rightMargin: 20
+                implicitHeight: 140
+                implicitWidth: 500
+                radius: 20
+                color: "#363640"
+
+                ColumnLayout{
+                    spacing: 5
+                    anchors.margins: 5
+                    anchors.centerIn: parent
+                    Layout.fillWidth: true
+                    RowLayout{
+                        spacing: 50
+                        Label {
+                            text: navigationService.currentInstruction.nextStreetName
+                            Layout.alignment: Qt.AlignLeft
+                            font.pixelSize: 24
+                            color: "white"
+                            font.family: "Montserrat"
+                            font.bold: Font.Normal
+                        }
+                        Item{
+                            Layout.fillWidth: true
+                        }
+
+                        Label {
+                            text: {
+                                var currentTime = new Date();
+                                var timeToAdd = new Date();
+
+                                // Set the time interval to add (hours, minutes, seconds)
+                                timeToAdd.setHours(1);       // 1 hour
+                                timeToAdd.setMinutes(30);    // 30 minutes
+                                timeToAdd.setSeconds(15);    // 15 seconds
+
+                                // Add the time interval to the current time
+                                currentTime.setMilliseconds(currentTime.getMilliseconds() + timeToAdd.getTime());
+
+                                // Format the result to display as HH:mm:ss
+                                var hours = currentTime.getHours().toString().padStart(2, "0");
+                                var minutes = currentTime.getMinutes().toString().padStart(2, "0");
+                                var seconds = currentTime.getSeconds().toString().padStart(2, "0");
+
+                                return hours + ":" + minutes + ":" + seconds;
+                            }
+                            Layout.alignment: Qt.AlignRight
+                            color: "white"
+                            font.pixelSize: 18
+                            font.family: "Montserrat"
+                            font.bold: Font.Normal
+                        }
+                    }
+                    RowLayout{
+                        spacing: 50
+                        Label {
+                            text: distance(navigationService.currentInstruction.traveledDistance)
+                            Layout.alignment: Qt.AlignLeft
+                            font.pixelSize: 18
+                            color: "white"
+                            font.family: "Montserrat"
+                            font.bold: Font.Normal
+                        }
+                        Item{
+                            Layout.fillWidth: true
+                        }
+
+                        Label {
+                            text: qsTr("Estimated Arrival")
+                            Layout.alignment: Qt.AlignRight
+                            color: "white"
+                            font.family: "Montserrat"
+                            font.bold: Font.Normal
+                            font.pixelSize: 18
+                        }
+                    }
+                    RowLayout{
+                        spacing: 50
+                        Label {
+                            Layout.alignment: Qt.AlignLeft
+                            font.pixelSize: 18
+                            color: "white"
+                            font.family: "Montserrat"
+                            font.bold: Font.Normal
+                            text: distance(navigationService.currentInstruction.remainingTravelDistance)
+                        }
+
+                        Slider{
+                            from:0
+                            to: navigationService.currentInstruction.traveledDistance+ navigationService.currentInstruction.remainingTravelDistance
+                            value: navigationService.currentInstruction.traveledDistance
+                            Layout.alignment: Qt.AlignHCenter
+                            Layout.fillWidth: true
+                        }
+
+                        Label {
+                            Layout.alignment: Qt.AlignRight
+                            color: "white"
+                            font.family: "Montserrat"
+                            font.bold: Font.Normal
+                            font.pixelSize: 18
+                            text: convertSecondsToTime(navigationService.currentInstruction.remainingTravelTime) //navigationService.currentInstruction.nextSpeedLimitVariation()
+                            function convertSecondsToTime(seconds) {
+                                var hours = Math.floor(seconds / 3600);
+                                var remainingSeconds = seconds % 3600;
+                                var minutes = Math.floor(remainingSeconds / 60);
+                                var remainingMinutes = remainingSeconds % 60;
+
+                                var hoursStr = hours < 10 ? "0" + hours : hours;
+                                var minutesStr = minutes < 10 ? "0" + minutes : minutes;
+                                var secondsStr = remainingMinutes < 10 ? "0" + remainingMinutes : remainingMinutes;
+                                return hoursStr + ":" + minutesStr + ":" + secondsStr;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // Now Add two Points 1 = StartingPoint And 2 = Ending Point
     RoutingService
     {
@@ -96,289 +383,6 @@ Rectangle {
     LandmarkList {
         id: routingWaypoints
     }
-
-    MapView
-    {
-        id:geomapview
-        anchors.fill : mapArea
-        clip: true
-        width: mapArea.width - 5
-        height: mapArea.height - 5
-        viewAngle: 35
-        cursorVisibility: false
-        viewPerspective: MapView.ViewPerspective.View3D
-        buildingsVisibility: MapView.BuildingsVisibility.Show3D
-        detailsQualityLevel: MapView.DetailsQualityLevel.Medium
-        onRouteSelected:
-        {
-            routeCollection.mainRoute = route
-            centerOnRoute(route)
-            console.log("Selected Route Is : " + route.summary)
-        }
-        ColumnLayout {
-                    anchors.fill: parent
-                    anchors.topMargin: 15
-                    anchors.leftMargin: 15
-                    anchors.rightMargin: 700
-                    anchors.bottomMargin: 30
-
-            TextField {
-                id: searchBar
-                Layout.fillWidth: true
-                placeholderText: qsTr("Where would you like to go?")
-                onTextChanged: searchTimer.restart()
-                onEditingFinished: searchService.searchNow()
-            }
-            Rectangle {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                color: Qt.rgba(0,0,0,0.5)
-                visible: searchBar.focus
-                ListView {
-                    id: searchList
-                    anchors.fill: parent
-                    clip: true
-                    model: searchService
-                    function distance(meters)
-                    {
-                        return meters >= 1000 ? (meters / 1000.).toFixed(3) + " Km" :  meters.toFixed(0) + " m";
-                    }
-                    delegate: Item {
-                        height: row.height
-                        RowLayout {
-                            id: row
-                            spacing: 15
-                            IconView {
-                                iconSource: landmark.icon
-                                Layout.maximumHeight: row.height
-                                Layout.maximumWidth: row.height
-                                width: 40
-                                height: 40
-                            }
-                            ColumnLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
-                                Text {
-                                    Layout.fillWidth: true
-                                    text: landmark.name + " (" + searchList.distance(landmark.coordinates.distance(searchService.referencePoint)) + ")"
-                                    color: "white"
-                                    font.pixelSize: 16
-                                    wrapMode: Text.WrapAnywhere
-                                }
-                                Text {
-                                    Layout.fillWidth: true
-                                    text: landmark.description
-                                    color: "white"
-                                    font.pixelSize: 13
-                                    font.italic: true
-                                    wrapMode: Text.WrapAnywhere
-                                }
-                                Rectangle{
-                                    Layout.fillWidth: true
-                                    color: "white"
-                                    height: 1
-                                }
-                            }
-                        }
-                        MouseArea {
-                            anchors.fill: row
-                            onClicked: {
-                                destinationCoordinates = searchService.get(index).coordinates;
-                                console.log("Destination coordinates:", destinationCoordinates);
-                                geomapview.centerOnCoordinates(searchService.get(index).coordinates, -1);
-                                searchBar.focus = false;                            }
-                        }
-                    }
-                }
-            }
-            Item {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-            }
-        }
-        Rectangle{
-            z:5
-            visible: navigationService.active
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 20
-            anchors.left: parent.left
-            anchors.leftMargin: 20
-            implicitHeight: 140
-            implicitWidth: 420
-            radius: 20
-            color: "#439df3"
-
-            RowLayout{
-                width: parent.width
-                spacing: 0
-                anchors.centerIn: parent
-                Item{
-                    Layout.alignment: Qt.AlignLeft
-                    Layout.preferredWidth: parent.width * 0.33
-                    Layout.fillHeight: true
-                    RowLayout{
-                        anchors.centerIn: parent
-                        spacing: 20
-                        DynamicIconView {
-                            width: 100
-                            height: 100
-                            arrowInner: "White"
-                            arrowOuter: "White"
-                            slotInner: "Grey"
-                            slotOuter: arrowOuter
-                            iconSource: navigationService.currentInstruction.nextTurnDynamicIcon
-                        }
-
-                        Rectangle{
-                            width: 1
-                            height: 100
-                            color: "#5cb1ff"
-                        }
-                    }
-                }
-                ColumnLayout{
-                    Layout.fillWidth: true
-                    spacing: 5
-                    Label {
-                        Layout.alignment: Qt.AlignLeft
-                        font.pixelSize: 24
-                        color: "white"
-                        text: distance(navigationService.currentInstruction.distanceToNextTurn)
-                    }
-                    Label {
-                        Layout.alignment: Qt.AlignLeft
-                        color: "white"
-                        Layout.fillWidth: true
-                        font.pixelSize: 18
-                        text: navigationService.currentInstruction.nextStreetName
-                    }
-                }
-            }
-        }
-        Rectangle{
-            z:5
-            visible: navigationService.active
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 20
-            anchors.right: parent.right
-            anchors.rightMargin: 20
-            implicitHeight: 140
-            implicitWidth: 500
-            radius: 20
-            color: "#363640"
-
-            ColumnLayout{
-                spacing: 5
-                anchors.margins: 5
-                anchors.centerIn: parent
-                Layout.fillWidth: true
-                RowLayout{
-                    spacing: 50
-                    Label {
-                        text: navigationService.currentInstruction.nextStreetName
-                        Layout.alignment: Qt.AlignLeft
-                        font.pixelSize: 24
-                        color: "white"
-                        font.family: "Montserrat"
-                        font.bold: Font.Normal
-                    }
-                    Item{
-                        Layout.fillWidth: true
-                    }
-
-                    Label {
-                        text: {
-                            var currentTime = new Date();
-                            var timeToAdd = new Date();
-
-                            // Set the time interval to add (hours, minutes, seconds)
-                            timeToAdd.setHours(1);       // 1 hour
-                            timeToAdd.setMinutes(30);    // 30 minutes
-                            timeToAdd.setSeconds(15);    // 15 seconds
-
-                            // Add the time interval to the current time
-                            currentTime.setMilliseconds(currentTime.getMilliseconds() + timeToAdd.getTime());
-
-                            // Format the result to display as HH:mm:ss
-                            var hours = currentTime.getHours().toString().padStart(2, "0");
-                            var minutes = currentTime.getMinutes().toString().padStart(2, "0");
-                            var seconds = currentTime.getSeconds().toString().padStart(2, "0");
-
-                            return hours + ":" + minutes + ":" + seconds;
-                        }
-                        Layout.alignment: Qt.AlignRight
-                        color: "white"
-                        font.pixelSize: 18
-                        font.family: "Montserrat"
-                        font.bold: Font.Normal
-                    }
-                }
-                RowLayout{
-                    spacing: 50
-                    Label {
-                        text: distance(navigationService.currentInstruction.traveledDistance)
-                        Layout.alignment: Qt.AlignLeft
-                        font.pixelSize: 18
-                        color: "white"
-                        font.family: "Montserrat"
-                        font.bold: Font.Normal
-                    }
-                    Item{
-                        Layout.fillWidth: true
-                    }
-
-                    Label {
-                        text: qsTr("Estimated Arrival")
-                        Layout.alignment: Qt.AlignRight
-                        color: "white"
-                        font.family: "Montserrat"
-                        font.bold: Font.Normal
-                        font.pixelSize: 18
-                    }
-                }
-                RowLayout{
-                    spacing: 50
-                    Label {
-                        Layout.alignment: Qt.AlignLeft
-                        font.pixelSize: 18
-                        color: "white"
-                        font.family: "Montserrat"
-                        font.bold: Font.Normal
-                        text: distance(navigationService.currentInstruction.remainingTravelDistance)
-                    }
-
-                    Slider{
-                        from:0
-                        to: navigationService.currentInstruction.traveledDistance+ navigationService.currentInstruction.remainingTravelDistance
-                        value: navigationService.currentInstruction.traveledDistance
-                        Layout.alignment: Qt.AlignHCenter
-                        Layout.fillWidth: true
-                    }
-
-                    Label {
-                        Layout.alignment: Qt.AlignRight
-                        color: "white"
-                        font.family: "Montserrat"
-                        font.bold: Font.Normal
-                        font.pixelSize: 18
-                        text: convertSecondsToTime(navigationService.currentInstruction.remainingTravelTime) //navigationService.currentInstruction.nextSpeedLimitVariation()
-                        function convertSecondsToTime(seconds) {
-                            var hours = Math.floor(seconds / 3600);
-                            var remainingSeconds = seconds % 3600;
-                            var minutes = Math.floor(remainingSeconds / 60);
-                            var remainingMinutes = remainingSeconds % 60;
-
-                            var hoursStr = hours < 10 ? "0" + hours : hours;
-                            var minutesStr = minutes < 10 ? "0" + minutes : minutes;
-                            var secondsStr = remainingMinutes < 10 ? "0" + remainingMinutes : remainingMinutes;
-                            return hoursStr + ":" + minutesStr + ":" + secondsStr;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     Timer {
         id: searchTimer
         interval: 500

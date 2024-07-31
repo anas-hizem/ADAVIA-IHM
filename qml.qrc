@@ -23,8 +23,6 @@
         <file>assets/tickmark.svg</file>
         <file>assets/unlock.png</file>
         <file>assets/user.png</file>
-        <file>SliderBar.qml</file>
-        <file>MusicPlayer.qml</file>
         <file>NavBar.qml</file>
         <file>assets/path.png</file>
         <file>fonts/OpenSans-Bold.ttf</file>
@@ -37,20 +35,6 @@
         <file>fonts/OpenSans-Regular.ttf</file>
         <file>fonts/OpenSans-Semibold.ttf</file>
         <file>fonts/OpenSans-SemiboldItalic.ttf</file>
-        <file>gfx/background.png</file>
-        <file>gfx/bar.png</file>
-        <file>gfx/cover.png</file>
-        <file>gfx/cover_frame.png</file>
-        <file>gfx/cover_overlay.png</file>
-        <file>gfx/slider_background.png</file>
-        <file>gfx/slider_knob.png</file>
-        <file>gfx/slider_value_left.png</file>
-        <file>gfx/slider_value_right.png</file>
-        <file>icons/forward.png</file>
-        <file>icons/pause.png</file>
-        <file>icons/play.png</file>
-        <file>icons/rewind.png</file>
-        <file>icons/share.png</file>
         <file>music/01.Daydreamer.mp3</file>
         <file>music/02.Go.Ahead.mp3</file>
         <file>music/02.Let.s.Get.Excited.mp3</file>
@@ -66,5 +50,66 @@
         <file>assets/redcircle.png</file>
         <file>assets/greensquare.png</file>
         <file>assets/bluetriangle.png</file>
+        <file>WeatherInfo.qml</file>
+        <file>weather/components/BigForecastIcon.qml</file>
+        <file>weather/components/ForecastIcon.qml</file>
+        <file>weather/components/WeatherIcon.qml</file>
+        <file>weather/icon/ic_launcher.png</file>
+        <file>weather/icon/weather-few-clouds.png</file>
+        <file>weather/icon/weather-fog.png</file>
+        <file>weather/icon/weather-haze.png</file>
+        <file>weather/icon/weather-icy.png</file>
+        <file>weather/icon/weather-overcast.png</file>
+        <file>weather/icon/weather-showers.png</file>
+        <file>weather/icon/weather-sleet.png</file>
+        <file>weather/icon/weather-snow.png</file>
+        <file>weather/icon/weather-storm.png</file>
+        <file>weather/icon/weather-sunny-very-few-clouds.png</file>
+        <file>weather/icon/weather-sunny.png</file>
+        <file>weather/icon/weather-thundershower.png</file>
+        <file>music/assets/fonts/fontawesome.otf</file>
+        <file>music/assets/icons8-music-record-48.png</file>
+        <file>music/assets/icons8-music-record-96.png</file>
+        <file>music/qml/components/AppIcon.qml</file>
+        <file>music/qml/components/MenuPopup.qml</file>
+        <file>music/qml/components/MusicDelegateMenuPopup.qml</file>
+        <file>music/qml/components/RoundProgressBar.qml</file>
+        <file>music/qml/components/TopNavBar.qml</file>
+        <file>music/qml/delegates/MusicDelegate.qml</file>
+        <file>music/qml/views/DashboardPlayingView.qml</file>
+        <file>music/qml/views/PlayingView.qml</file>
+        <file>music/qml/views/PlaylistView.qml</file>
+        <file>music/qml/Music.qml</file>
+        <file>Music.qml</file>
+        <file>IconButton.qml</file>
+        <file>Theme.qml</file>
+        <file>assets/spotify.svg</file>
+        <file>assets/spotify_circle.svg</file>
+        <file>TSlider.qml</file>
+        <file>camerastreaming.qml</file>
+        <file>UltrasonSensor.qml</file>
+        <file>assets/actia.png</file>
+        <file>assets/green-wave-01.png</file>
+        <file>assets/green-wave-02.png</file>
+        <file>assets/green-wave-03.png</file>
+        <file>assets/green-wave-04.png</file>
+        <file>assets/green-wave-05.png</file>
+        <file>assets/navette-vue-dessus.png</file>
+        <file>assets/navette-vue-dessus1.png</file>
+        <file>assets/navette-vue-dessus2.png</file>
+        <file>assets/orange-wave-01.png</file>
+        <file>assets/orange-wave-02.png</file>
+        <file>assets/orange-wave-03.png</file>
+        <file>assets/orange-wave-04.png</file>
+        <file>assets/orange-wave-05.png</file>
+        <file>assets/red-wave-01.png</file>
+        <file>assets/red-wave-02.png</file>
+        <file>assets/red-wave-03.png</file>
+        <file>assets/red-wave-04.png</file>
+        <file>assets/red-wave-05.png</file>
+        <file>assets/logoactiawhite.png</file>
+        <file>assets/logoactiagray.png</file>
+        <file>assets/logoactia.png</file>
+        <file>LIDAR.qml</file>
     </qresource>
 </RCC>

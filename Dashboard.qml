@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-
+import QtQuick.Layouts 1.3
 
 Rectangle {
     id: root
@@ -33,32 +33,14 @@ Rectangle {
             id: mapArea
         }
         // WEATHER AREA
-        Rectangle {
-            id: weatherArea
-            width: (rightScreen.width / 2) - 10
-            height: (rightScreen.height * 1 / 4) - 15
-            color: "#A1CD3C"
-            radius: 20
-            anchors {
-                right: rightScreen.right
-                bottom: rightScreen.bottom
-            }
+        WeatherInfo {
+            id: weartherArea
         }
         // MUSIC AREA
-        Rectangle {
-            id: musicArea
-            width: (rightScreen.width / 2) - 10
-            height: (rightScreen.height * 1 / 4) - 15
-            anchors{
-                left: rightScreen.left
-                bottom: rightScreen.bottom
-            }
-            radius: 20
-            color: "#A1CD3C"
-            MusicPlayer {
-                id: musicPlayer
-            }
+        Music {
+            id: musicPlayer
         }
+
     }
     // INFORMATION AREA
     Info {
